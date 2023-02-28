@@ -19,6 +19,7 @@ const db = mysql.createConnection(
     console.log(`You are now connected to the employee database.`)
 );
 
+// Created these 3 const/functions to access department, role, and manager lists for the inquirer prompts.
 const dept = async () => {
     let deptArray = [];
 
@@ -153,6 +154,7 @@ const startInquirer = async () => {
                 return 'Please enter the salary for this role'
             }
         },
+        // This is where the first List came in, by grabbing an array of the departments I was able to list those as the choices for this prompt.
         {
             type: 'list',
             message: 'What department is this role assigned to?',
@@ -203,6 +205,7 @@ const startInquirer = async () => {
             message: 'Which employee do you want to update?',
             name: 'chosenEmp',
             choices: managerList,
+            // I had to fix this one cause I was following the previous prompt and put 'Update an employee' instead of how I had the userInput listed above.
             when: answer => (answer.userInput === 'Update employee role')
         },
         {
@@ -215,8 +218,11 @@ const startInquirer = async () => {
         
     ])
     .then(answer => {
+        // I initially tried to do if/else statements for the .then(answer), but struggled with the functionality. 
+        // Then a friend reminded me of the switch/case statements and it just worked much better.
         let sql = '';
         let showTable = true;
+        // Switch statement will take the userInput as the parameter and the case will return results based off of the chosen answer.
         switch (answer.userInput) {
             case 'View all departments':
                 sql = viewQueries.viewAllDepartments();
@@ -274,7 +280,6 @@ const startInquirer = async () => {
                 return;
               } 
               else { 
-                // console.log("success"); 
                 if (showTable) { console.table(rows); }
                 startInquirer();
               }
