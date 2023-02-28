@@ -219,7 +219,7 @@ const startInquirer = async () => {
     ])
     .then(answer => {
         // I initially tried to do if/else statements for the .then(answer), but struggled with the functionality. 
-        //Then a friend reminded me of the switch/case statements and it just worked much better.
+        // Then a friend reminded me of the switch/case statements and it just worked much better.
         let sql = '';
         let showTable = true;
         // Switch statement will take the userInput as the parameter and the case will return results based off of the chosen answer.
@@ -280,7 +280,6 @@ const startInquirer = async () => {
                 return;
               } 
               else { 
-                // console.log("success"); 
                 if (showTable) { console.table(rows); }
                 startInquirer();
               }
